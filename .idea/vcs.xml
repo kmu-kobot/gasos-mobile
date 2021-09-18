@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gasos" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gasos/gasos-mobile" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gasos/gasos-sensor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gasos/gasos-server" vcs="Git" />
   </component>
 </project>

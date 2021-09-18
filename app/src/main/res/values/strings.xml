@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GASOS</string>
+    <string name="firebase_web_client_id">116513225858-r38f5mou3sv9uulqkdek066j4t918efl.apps.googleusercontent.com</string>
+    <string name="client_secret">aHrN6t4nOKA6svXtsLKExEzB</string>
 </resources>
