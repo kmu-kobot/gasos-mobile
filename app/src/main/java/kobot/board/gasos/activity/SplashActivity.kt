@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import kobot.board.gasos.R
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AnimationActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)

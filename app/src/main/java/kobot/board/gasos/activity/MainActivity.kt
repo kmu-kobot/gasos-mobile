@@ -1,12 +1,25 @@
 package kobot.board.gasos.activity
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
+import android.graphics.Rect
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Base64
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kobot.board.gasos.R
@@ -16,8 +29,9 @@ import kobot.board.gasos.fragment.ProfileFragment
 import kobot.board.gasos.fragment.SearchFragment
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.jar.Manifest
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
 
     private val homeFragment by lazy { HomeFragment() }
     private val searchFragment by lazy { SearchFragment() }
@@ -25,12 +39,57 @@ class MainActivity : AppCompatActivity() {
     private val profileFragment by lazy { ProfileFragment() }
     lateinit var bottomNavigationView : BottomNavigationView
 
+    private fun permissionCheck() {
+        val preference = getPreferences(MODE_PRIVATE)
+        val isFirstCheck = preference.getBoolean("isFirstPermissionCheck", true)
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)) {
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("현재 위치를 확인하시려면 위치 권한을 허용해주세요.")
+                builder.setPositiveButton("확인") { dialog, which ->
+                    ActivityCompat.requestPermissions(this, arrayOf(ACCESS_FINE_LOCATION), 1000)
+                }
+                builder.setNegativeButton("취소") { dialog, which ->
+
+                }
+                builder.show()
+            } else {
+                if (isFirstCheck) {
+                    preference.edit().putBoolean("isFirstPermissionCheck", false).apply()
+                    ActivityCompat.requestPermissions(this, arrayOf(ACCESS_FINE_LOCATION), 1000)
+                } else {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setMessage("현재 위치를 확인하시려면 설정에서 위치 권한을 허용해주세요.")
+                    builder.setPositiveButton("설정으로 이동") { dialog, which ->
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
+                        startActivity(intent)
+                    }
+                    builder.setNegativeButton("취소") { dialog, which ->
+
+                    }
+                    builder.show()
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1000) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                Toast.makeText(this, "위치 권한이 거절되었습니다", Toast.LENGTH_SHORT).show()
+                permissionCheck()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavigationView = findViewById(R.id.bottomNavigation)
         navigationBarController()
-        getHashKey()
+        permissionCheck()
     }
 
     private fun navigationBarController() {
@@ -41,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                         fragmentChanger(homeFragment)
                     }
                     R.id.search -> {
+                        permissionCheck()
                         fragmentChanger(searchFragment)
                     }
                     R.id.notification -> {

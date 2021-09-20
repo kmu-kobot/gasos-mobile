@@ -2,14 +2,163 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#FFF"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map_view"/>
+
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:id="@+id/search_frame"
+            android:layout_height="match_parent">
+
+            <net.daum.mf.map.api.MapView
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageButton
+                android:id="@+id/fine_location_btn"
+                android:layout_width="48dp"
+                android:elevation="20dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_gravity="left|bottom"
+                android:layout_above="@+id/map_view"
+                android:background="@drawable/rounded_white_button"
+                android:src="@drawable/checked_location" />
+
+            <ImageButton
+                android:id="@+id/zoomOutBtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:elevation="20dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_gravity="right|bottom"
+                android:layout_above="@+id/map_view"
+                android:background="@drawable/rounded_white_button"
+                android:src="@drawable/minus" />
+
+            <ImageButton
+                android:id="@+id/zoomInBtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:elevation="10dp"
+                android:layout_marginBottom="60dp"
+                android:layout_marginRight="12dp"
+                android:layout_gravity="right|bottom"
+                android:layout_above="@+id/map_view"
+                android:background="@drawable/rounded_white_button"
+                android:src="@drawable/ic_baseline_add_24" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:id="@+id/menu_container"
+                    android:elevation="10dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="92dp"
+                    android:background="@drawable/rounded_white_button"
+                    android:layout_height="56dp">
+
+                    <ImageButton
+                        android:id="@+id/menu_list"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="10dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:background="@drawable/rounded_white_button"
+                        android:src="@drawable/ic_baseline_menu_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:focusableInTouchMode="true"
+                        android:focusable="true"
+                        android:id="@+id/search_bar"
+                        android:layout_width="match_parent"
+                        android:lines="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="58dp"
+                        android:background="#FFF"
+                        android:textColor="#353535"
+                        android:hint="주소를 입력해주세요."
+                        android:textColorHint="#818181"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/menu_list"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageButton
+                    android:id="@+id/search_btn"
+                    android:elevation="10dp"
+                    android:src="@drawable/ic_baseline_search_24"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/rounded_orange_button"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
+                android:id="@+id/boho_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="104dp"
+                android:layout_above="@+id/zoomOutBtn"
+                android:background="@drawable/rounded_white_menu">
+
+                <ImageButton
+                    android:id="@+id/menu_close"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_close_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="보호대상자"
+                    android:textStyle="bold"
+                    android:textColor="#4A4A4A"
+                    android:textSize="28dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </FrameLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
