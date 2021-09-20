@@ -1,11 +1,14 @@
 package kobot.board.gasos.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageButton
@@ -14,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import kobot.board.gasos.R
+import kobot.board.gasos.activity.MenuActivity
 import kobot.board.gasos.data.Place
 import kobot.board.gasos.data.ResultSearchAddress
 import kobot.board.gasos.util.KakaoAPI
@@ -94,12 +98,10 @@ class SearchFragment : Fragment() {
 
         bohoMenu = v.findViewById(R.id.boho_menu)
         closeBtn = v.findViewById(R.id.menu_close)
-        closeBtn.setOnClickListener {
-            closeBohoMenu(v)
-        }
+
         menuList = v.findViewById(R.id.menu_list)
         menuList.setOnClickListener {
-            openBohoMenu(v)
+            startActivity(Intent(activity, MenuActivity::class.java))
         }
         zoomInBtn = v.findViewById(R.id.zoomInBtn)
         zoomInBtn.setOnClickListener {
@@ -141,28 +143,6 @@ class SearchFragment : Fragment() {
             }
         }
         return v
-    }
-
-    private fun openBohoMenu(v : View) {
-        val animation = AlphaAnimation(0.0f, 1.0f)
-        animation.duration = 1000
-        bohoMenu.visibility = View.VISIBLE
-        bohoMenu.animation = animation
-
-        fineLocationBtn.visibility = View.GONE
-        zoomInBtn.visibility = View.GONE
-        zoomOutBtn.visibility = View.GONE
-    }
-
-    private fun closeBohoMenu(v : View) {
-        val animation = AlphaAnimation(1.0f, 0.0f)
-        animation.duration = 1000
-        bohoMenu.animation = animation
-        bohoMenu.visibility = View.GONE
-
-        fineLocationBtn.visibility = View.VISIBLE
-        zoomInBtn.visibility = View.VISIBLE
-        zoomOutBtn.visibility = View.VISIBLE
     }
 
     private fun zoomIn(){

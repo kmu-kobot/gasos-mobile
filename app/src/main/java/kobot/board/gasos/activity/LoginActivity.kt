@@ -20,7 +20,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kobot.board.gasos.R
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AnimationActivity(TransitionMode.HORIZON) {
 
     private lateinit var auth : FirebaseAuth
     private lateinit var client : GoogleSignInClient
@@ -62,15 +62,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUI(){
-        val user = FirebaseAuth.getInstance().currentUser
-        val email : String = auth.currentUser?.email.toString()
-        val name = user!!.displayName
-        val photourl = user.photoUrl.toString()
 
         intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("email", email)
-        intent.putExtra("name", name)
-        intent.putExtra("photourl", photourl)
 
         startActivity(intent)
         finish()
@@ -89,5 +82,10 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         loginBtn = findViewById<SignInButton>(R.id.google_login)
         setGoogleLogin()
+    }
+
+    public fun Logout() {
+        FirebaseAuth.getInstance().signOut()
+        onRestart()
     }
 }

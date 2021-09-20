@@ -19,7 +19,7 @@ import kobot.board.gasos.fragment.SearchFragment
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
-class NotificationActivity : AppCompatActivity() {
+class NotificationActivity : AnimationActivity(TransitionMode.VERTICAL) {
 
     lateinit var closeButton : ImageButton
     lateinit var fusecockControllBtn : Button

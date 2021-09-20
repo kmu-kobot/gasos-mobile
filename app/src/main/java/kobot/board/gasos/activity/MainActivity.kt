@@ -31,7 +31,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.jar.Manifest
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
 
     private val homeFragment by lazy { HomeFragment() }
     private val searchFragment by lazy { SearchFragment() }
