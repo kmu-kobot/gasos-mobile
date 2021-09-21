@@ -29,6 +29,7 @@
             android:configChanges="orientation|screenSize"/>
         <activity android:name=".activity.NotificationActivity"/>
         <activity android:name=".activity.MenuActivity"/>
+        <activity android:name=".activity.VersionActivity"/>
         <activity android:name=".activity.MainNotificationActivity"/>
     </application>
 

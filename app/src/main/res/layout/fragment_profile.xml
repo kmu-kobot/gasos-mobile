@@ -86,7 +86,7 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_mint_button"
             android:elevation="10dp"
-            android:text="디바이스"
+            android:text="버전정보"
             android:textSize="24dp"
             android:textStyle="bold" />
 

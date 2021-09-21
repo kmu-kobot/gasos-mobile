@@ -6,13 +6,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -21,8 +18,7 @@ import kobot.board.gasos.activity.MenuActivity
 import kobot.board.gasos.data.Place
 import kobot.board.gasos.data.ResultSearchAddress
 import kobot.board.gasos.util.KakaoAPI
-import net.daum.android.map.coord.MapCoord
-import net.daum.android.map.coord.MapCoordLatLng
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import retrofit2.Call
@@ -30,7 +26,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.Key
 import kotlin.math.roundToInt
 
 class SearchFragment : Fragment() {
@@ -44,6 +39,11 @@ class SearchFragment : Fragment() {
     private lateinit var searchBar : EditText
     private lateinit var bohoMenu : ConstraintLayout
     private lateinit var closeBtn : ImageButton
+    private lateinit var addressInfo : TextView
+    private lateinit var dialog : RelativeLayout
+    private lateinit var yesBtn : Button
+    private lateinit var noBtn : Button
+    private lateinit var marker : MapPOIItem
 
     companion object {
         const val KAKAO_BASE_URL = "https://dapi.kakao.com/"
@@ -73,6 +73,7 @@ class SearchFragment : Fragment() {
                     var x = (address[0].x.toFloat()*100000).roundToInt() / 100000f
                     var y = (address[0].y.toFloat()*100000).roundToInt() / 100000f
                     setLocation(x.toDouble(), y.toDouble())
+                    allowMarker(x.toDouble(), y.toDouble(), address[0].address_name)
                 }
                 else{
                     Toast.makeText(context, "주소 정보를 정확히 기입해주십시오.", Toast.LENGTH_SHORT).show()
@@ -95,6 +96,24 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_search, container, false)
+
+        dialog = v.findViewById(R.id.marker_layout)
+
+        addressInfo = v.findViewById(R.id.address_alert)
+        yesBtn = v.findViewById(R.id.allow_marker_btn)
+        yesBtn.setOnClickListener {
+            val fadeAnim: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_from_bottom_to_top)
+            dialog.startAnimation(fadeAnim)
+            dialog.visibility = View.GONE
+            addMarkerData()
+        }
+        noBtn = v.findViewById(R.id.deny_marker_btn)
+        noBtn.setOnClickListener {
+            val fadeAnim: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_from_bottom_to_top)
+            dialog.startAnimation(fadeAnim)
+            dialog.visibility = View.GONE
+            mapview.removePOIItem(marker)
+        }
 
         bohoMenu = v.findViewById(R.id.boho_menu)
         closeBtn = v.findViewById(R.id.menu_close)
@@ -134,15 +153,16 @@ class SearchFragment : Fragment() {
         fineLocationBtn.setOnClickListener {
             if(checker == 1){
                 stopFindingFineLocation()
-                fineLocationBtn.setImageResource(R.drawable.ic_baseline_my_location_24)
-                checker = 0
+
             }else{
                 findFineLocation()
-                fineLocationBtn.setImageResource(R.drawable.checked_location)
-                checker = 1
             }
         }
         return v
+    }
+
+    private fun addMarkerData() {
+
     }
 
     private fun zoomIn(){
@@ -162,12 +182,32 @@ class SearchFragment : Fragment() {
         mapview.setMapCenterPoint(mapXY, true)
     }
 
+    private fun allowMarker(x: Double, y: Double, address: String) {
+        marker = MapPOIItem()
+        marker.apply {
+            marker.itemName = address
+            mapPoint = MapPoint.mapPointWithGeoCoord(y, x)
+            markerType = MapPOIItem.MarkerType.YellowPin
+            selectedMarkerType = MapPOIItem.MarkerType.YellowPin
+        }
+        addressInfo.text = address+"의 주소로 보호대상자를 등록하시겠습니까?"
+        mapview.addPOIItem(marker)
+        val fadeAnim: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_from_top_to_bottom)
+        dialog.startAnimation(fadeAnim)
+        dialog.visibility = View.VISIBLE
+
+    }
+
     private fun findFineLocation() {
         mapview.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
         mapview.setZoomLevel(3, true)
+        fineLocationBtn.setImageResource(R.drawable.checked_location)
+        checker = 1
     }
 
     private fun stopFindingFineLocation() {
+        fineLocationBtn.setImageResource(R.drawable.ic_baseline_my_location_24)
+        checker = 0
         mapview.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
     }
 }
