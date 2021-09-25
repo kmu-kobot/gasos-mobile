@@ -56,7 +56,7 @@
                 android:layout_gravity="right|bottom"
                 android:layout_above="@+id/map_view"
                 android:background="@drawable/rounded_white_button"
-                android:src="@drawable/ic_baseline_add_24" />
+                android:src="@drawable/add" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                 <ImageButton
                     android:id="@+id/search_btn"
                     android:elevation="10dp"
-                    android:src="@drawable/ic_baseline_search_24"
+                    android:src="@drawable/ic_baseline_add_24"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:focusable="true"
@@ -121,6 +121,68 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/marker_layout"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="96dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/rounded_white_button">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="60dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/allow_marker_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_green_button"
+                        android:text="예"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"
+                        android:textSize="22dp" />
+
+                    <Button
+                        android:id="@+id/deny_marker_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_red_button"
+                        android:text="아니오"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"
+                        android:textSize="22dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/address_alert"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_height="wrap_content"
+                    android:text="서울시 성북구 정릉로 15길 41길 주소로 보호대상자를 등록하시겠습니까?"
+                    android:textColor="#000"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:visibility="gone"
@@ -158,6 +220,56 @@
 
 
         </FrameLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/listmenu"
+        android:layout_marginTop="96dp"
+        android:visibility="gone"
+        android:background="@drawable/rounded_white_menu"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bohomenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF">
+
+            <ImageButton
+                android:id="@+id/menuclose"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_close_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="보호대상자"
+                android:textColor="#4A4A4A"
+                android:textSize="28dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/protectedList"
+            android:layout_marginTop="76dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

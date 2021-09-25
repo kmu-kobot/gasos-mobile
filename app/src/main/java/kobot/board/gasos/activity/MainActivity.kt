@@ -15,6 +15,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +23,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import de.hdodenhof.circleimageview.CircleImageView
 import kobot.board.gasos.R
 import kobot.board.gasos.fragment.HomeFragment
 import kobot.board.gasos.fragment.NotificationFragment
@@ -37,7 +41,8 @@ class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
     private val searchFragment by lazy { SearchFragment() }
     private val notificationFragment by lazy { NotificationFragment() }
     private val profileFragment by lazy { ProfileFragment() }
-    lateinit var bottomNavigationView : BottomNavigationView
+    public lateinit var bottomNavigationView : BottomNavigationView
+    private val firestore = Firebase.firestore
 
     private fun permissionCheck() {
         val preference = getPreferences(MODE_PRIVATE)
@@ -116,7 +121,7 @@ class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
         }
     }
 
-    private fun fragmentChanger(fragment: Fragment){
+    public fun fragmentChanger(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
     }
     fun getHashKey(){

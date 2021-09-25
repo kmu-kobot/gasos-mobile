@@ -9,6 +9,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kobot.board.gasos.R
@@ -25,11 +26,18 @@ class NotificationActivity : AnimationActivity(TransitionMode.VERTICAL) {
     lateinit var fusecockControllBtn : Button
     lateinit var naviBtn : Button
     lateinit var call119Btn : Button
-    lateinit var warnBtn : ImageButton
+    lateinit var warnBtn : Button
+    lateinit var coStatus : TextView
+    lateinit var gasStatus : TextView
+    lateinit var name : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
+
+        name = findViewById(R.id.notification_protected_person)
+        coStatus = findViewById(R.id.co_status)
+        gasStatus = findViewById(R.id.gas_status)
         fusecockControllBtn = findViewById(R.id.fusecock_controll_btn)
         naviBtn = findViewById(R.id.navi_browse_btn)
         call119Btn = findViewById(R.id.call_119_btn)
