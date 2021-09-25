@@ -26,6 +26,7 @@ import com.google.firebase.ktx.Firebase
 import de.hdodenhof.circleimageview.CircleImageView
 import kobot.board.gasos.R
 import kobot.board.gasos.activity.LoginActivity
+import kobot.board.gasos.activity.MenuActivity
 import kobot.board.gasos.activity.VersionActivity
 import org.w3c.dom.Text
 import java.io.File
@@ -74,7 +75,7 @@ class ProfileFragment : Fragment() {
 
         bohoBtn = v.findViewById(R.id.boho_daesangja)
         bohoBtn.setOnClickListener {
-            showBohoList()
+            startActivity(Intent(activity, MenuActivity::class.java))
         }
 
         versionBtn = v.findViewById(R.id.boho_daesangja_device)
@@ -94,12 +95,5 @@ class ProfileFragment : Fragment() {
         LoginActivity().Logout()
         startActivity(Intent(activity, LoginActivity::class.java))
         activity?.finish()
-    }
-
-    private fun showDeviceList() {
-
-    }
-
-    private fun showBohoList() {
     }
 }

@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginTop="56dp"
-    android:background="@drawable/white_screen"
+    android:background="#FFF"
     android:layout_height="match_parent">
 
     <ImageButton
@@ -21,14 +20,14 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="0.25dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/line"
         app:layout_constraintTop_toBottomOf="@+id/notification_person" />
 
     <TextView
         android:textStyle="bold"
-        android:id="@+id/notification_person"
+        android:id="@+id/notification_protected_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -39,60 +38,120 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/close_btn" />
 
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notification_protected_person" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/line"
+        app:layout_constraintBottom_toTopOf="@+id/gas_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/line"
+        app:layout_constraintBottom_toTopOf="@+id/fusecock_controll_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:text="CO 감지기 경보 발생"
         android:textColor="#000"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <Button
         android:id="@+id/warnBtn"
         android:layout_width="312dp"
         android:layout_height="312dp"
         android:background="@drawable/oval_red"
-        android:text="500"
+        android:text="위험"
         android:textSize="86dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fusecock_controll_btn"
+        app:layout_constraintBottom_toTopOf="@+id/gas_status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.48000002" />
 
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="178dp"
-        android:text="PPM"
-        android:textColor="#FFF"
-        android:textSize="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="18dp"
+        android:text="CO감지기 : "
+        android:textColor="#000"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/co_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="양호"
+        android:textColor="#7DEF82"
+        android:textSize="36dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/warnBtn"
-        app:layout_constraintEnd_toEndOf="@+id/warnBtn"
-        app:layout_constraintStart_toStartOf="@+id/warnBtn"
-        app:layout_constraintTop_toTopOf="@+id/warnBtn" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="178dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="66dp"
+        android:text="가스감지기 : "
+        android:textColor="#000"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/gas_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:text="위험"
-        android:textColor="#FFF"
-        android:textSize="32dp"
+        android:textColor="#FF246E"
+        android:textSize="36dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/warnBtn"
-        app:layout_constraintEnd_toEndOf="@+id/warnBtn"
-        app:layout_constraintStart_toStartOf="@+id/warnBtn"
-        app:layout_constraintTop_toTopOf="@+id/warnBtn" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

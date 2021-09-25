@@ -32,7 +32,6 @@ class LoginActivity : AnimationActivity(TransitionMode.HORIZON) {
             .build()
         client = GoogleSignIn.getClient(this, options)
         loginBtn.setOnClickListener {
-            Log.d("wae-02", "111111111111111111111111111111111")
             startActivityForResult(client.signInIntent, 1)
         }
     }
@@ -42,11 +41,9 @@ class LoginActivity : AnimationActivity(TransitionMode.HORIZON) {
         if (requestCode == 1){
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                Log.d("wae-03", task.result.idToken)
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken)
             }catch (e: ApiException){
-                Log.d("wae-04", "안되지?!")
             }
         }
     }
@@ -62,9 +59,7 @@ class LoginActivity : AnimationActivity(TransitionMode.HORIZON) {
     }
 
     private fun updateUI(){
-
         intent = Intent(this, MainActivity::class.java)
-
         startActivity(intent)
         finish()
     }
