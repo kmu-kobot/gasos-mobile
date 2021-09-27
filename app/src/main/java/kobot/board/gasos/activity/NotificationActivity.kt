@@ -52,7 +52,7 @@ class NotificationActivity : AnimationActivity(TransitionMode.VERTICAL) {
 
         call119Btn.setOnClickListener{
             var intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:01099585781")
+            intent.data = Uri.parse("tel:119")
             if(intent.resolveActivity(packageManager) != null){
                 startActivity(intent)
             }
