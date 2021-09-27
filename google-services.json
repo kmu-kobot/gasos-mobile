@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "116513225858",
+    "project_id": "gasos-30e82",
+    "storage_bucket": "gasos-30e82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116513225858:android:372de9c3c9fac1f986089b",
+        "android_client_info": {
+          "package_name": "kobot.board.gasos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116513225858-8l6mnfs6jq6jrtg60evnobco29ubngff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kobot.board.gasos",
+            "certificate_hash": "6b5f130e4e144ffa3b1ea35d4b7232b175cd1053"
+          }
+        },
+        {
+          "client_id": "116513225858-076d21rqk6jtk3lc2lnn5dgp742191bb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-xIcRmSGvWDaxxabpRpLSXQUTNL7Phpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116513225858-076d21rqk6jtk3lc2lnn5dgp742191bb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
