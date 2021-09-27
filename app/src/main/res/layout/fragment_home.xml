@@ -93,8 +93,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:background="@drawable/rounded_green_button"
-            android:text="   오늘 가스 및 CO 누출 \n   알림은 3건\n   입니다."
             android:textAlignment="viewStart"
+            android:text="   안녕하세요. \n   GASOS 입니다."
             android:textSize="28dp"
             android:textStyle="bold" />
 

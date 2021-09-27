@@ -14,11 +14,13 @@
         android:enabled="true"
         android:icon="@drawable/search_non_selected" />
 
+    <!--
     <item
         android:id="@+id/notification"
         app:showAsAction="ifRoom"
         android:enabled="true"
         android:icon="@drawable/notification_non_enabled"/>
+    -->
 
     <item
         android:id="@+id/profile"

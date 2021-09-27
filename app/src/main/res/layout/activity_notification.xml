@@ -71,14 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/line"
-        app:layout_constraintBottom_toTopOf="@+id/fusecock_controll_btn"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/notification_alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -101,7 +100,7 @@
         app:layout_constraintBottom_toTopOf="@+id/gas_status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/notification_alert"
         app:layout_constraintVertical_bias="0.48000002" />
 
     <TextView
@@ -161,40 +160,17 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            android:id="@+id/navi_browse_btn"
+            android:id="@+id/btn_119"
             android:layout_width="wrap_content"
             android:layout_height="64dp"
             android:layout_margin="12dp"
             android:layout_weight="1"
             android:background="@drawable/rounded_gray_button"
-            android:text="직접 방문"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/call_119_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="64dp"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_red_button"
-            android:text="119 신고"
+            android:text="119 전화 신고"
             android:textSize="24dp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/fusecock_controll_btn"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/rounded_mint_button"
-        android:text="휴즈콕 차단기 잠금"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="12dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,6 +61,7 @@ class SearchFragment : Fragment() {
     private lateinit var protectedListView : RecyclerView
     private lateinit var close : ImageButton
     private var addressReg : String = ""
+    private var name : String? = ""
 
     private lateinit var protectedList : ArrayList<Protected>
 
@@ -193,7 +194,6 @@ class SearchFragment : Fragment() {
         }
 
         val user = Firebase.auth.currentUser
-        var name : String? = ""
         var email : String?
         var uid : String?
         user?.let {
@@ -263,7 +263,7 @@ class SearchFragment : Fragment() {
 
         menuList = v.findViewById(R.id.menu_list)
         menuList.setOnClickListener {
-            val fadeAnim: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_from_bottom_to_top)
+            val fadeAnim: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_from_top_to_bottom)
             bohoList.startAnimation(fadeAnim)
             bohoList.visibility = View.VISIBLE
 
@@ -374,7 +374,32 @@ class SearchFragment : Fragment() {
         }
 
         override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
-            context.startActivity(Intent(context, NotificationActivity::class.java))
+            val intent = Intent(context, NotificationActivity::class.java)
+            val user = Firebase.auth.currentUser
+            var name : String = ""
+            user?.let {
+                for (profile in it.providerData) {
+                    // Id of the provider (ex: google.com)
+                    name = profile.displayName.toString()
+                }
+            }
+            var bohoname = p1!!.itemName.toString().split(" ")[0]
+            CoroutineScope(Dispatchers.Main).launch{
+                var protected = FireStoreManager(name).loadProtectedPersonalData(bohoname)
+
+                Log.d("boho", protected.toString())
+                if(protected?.stateLogList?.size != 0){
+                    Log.d("boho", protected.toString())
+                    intent.putExtra("COstate", protected?.stateLogList!![protected?.stateLogList?.size!! - 1]["COstate"].toString())
+                    intent.putExtra("LPGstate", protected?.stateLogList!![protected?.stateLogList?.size!! - 1]["LPGstate"].toString())
+                }else{
+                    Log.d("boho", protected!!.stateLogList.toString())
+                    intent.putExtra("COstate", protected?.stateLogList!![0]["COstate"].toString())
+                    intent.putExtra("LPGstate", protected?.stateLogList!![0]["LPGstate"].toString())
+                }
+                intent.putExtra("name", bohoname)
+                context.startActivity(intent)
+            }
         }
 
         override fun onCalloutBalloonOfPOIItemTouched(
