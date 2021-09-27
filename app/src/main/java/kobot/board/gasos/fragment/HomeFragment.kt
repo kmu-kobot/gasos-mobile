@@ -84,10 +84,10 @@ class HomeFragment : Fragment() {
         }
 
         statusBtn = v.findViewById(R.id.statusBtn)
-        statusBtn.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, NotificationFragment())?.commit()
-            (activity as MainActivity).bottomNavigationView.selectedItemId = R.id.notification
-        }
+        //statusBtn.setOnClickListener {
+        //    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, NotificationFragment())?.commit()
+        //    (activity as MainActivity).bottomNavigationView.selectedItemId = R.id.notification
+        //}
         userName = v.findViewById(R.id.username)
         userName.text = name.toString()
         userEmail = v.findViewById(R.id.useremail)

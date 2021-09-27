@@ -31,6 +31,7 @@ import kobot.board.gasos.fragment.HomeFragment
 import kobot.board.gasos.fragment.NotificationFragment
 import kobot.board.gasos.fragment.ProfileFragment
 import kobot.board.gasos.fragment.SearchFragment
+import kobot.board.gasos.util.GasosMessagingService
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.jar.Manifest
@@ -43,6 +44,7 @@ class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
     private val profileFragment by lazy { ProfileFragment() }
     public lateinit var bottomNavigationView : BottomNavigationView
     private val firestore = Firebase.firestore
+    private val gasosMessagingService = GasosMessagingService()
 
     private fun permissionCheck() {
         val preference = getPreferences(MODE_PRIVATE)
@@ -91,10 +93,24 @@ class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        moveNotification(this)
+        gasosMessagingService.myToken()
         setContentView(R.layout.activity_main)
         bottomNavigationView = findViewById(R.id.bottomNavigation)
         navigationBarController()
         permissionCheck()
+    }
+
+    private fun moveNotification(context: Context){
+        val intentNotificated = Intent(context, NotificationActivity::class.java)
+        Log.d("boho", intent.getStringExtra("notificated").toString())
+        if(intent.getStringExtra("notificated")  == "true"){
+            intentNotificated.putExtra("COstate",intent.getStringExtra("COstate"))
+            intentNotificated.putExtra("LPGstte", intent.getStringExtra("LPGstate"))
+            intentNotificated.putExtra("name", intent.getStringExtra("name"))
+            startActivity(intentNotificated)
+        }
     }
 
     private fun navigationBarController() {
@@ -108,9 +124,9 @@ class MainActivity : AnimationActivity(TransitionMode.HORIZON_REVERSE) {
                         permissionCheck()
                         fragmentChanger(searchFragment)
                     }
-                    R.id.notification -> {
-                        fragmentChanger(notificationFragment)
-                    }
+                    // R.id.notification -> {
+                      //  fragmentChanger(notificationFragment)
+                    //}
                     R.id.profile -> {
                         fragmentChanger(profileFragment)
                     }

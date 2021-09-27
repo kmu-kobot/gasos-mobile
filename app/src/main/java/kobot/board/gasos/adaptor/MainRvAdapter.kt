@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,17 +35,26 @@ class MainRvAdapter(val context: Context, val protectdList : ArrayList<Protected
             if (protected.address != null)  address?.text = protected.address
 
             if(protected.stateLogList?.size !=0){
-                if (protected.stateLogList!![protected.stateLogList?.size!! - 1]["COstate"] == "위험" || protected.stateLogList!![protected.stateLogList?.size!! - 1]["LPGstate"] == "위험"){
-                    statusLayout?.setBackgroundResource(R.drawable.oval_red)
-                    status?.text = "위험"
-                }else{
-                    statusLayout?.setBackgroundResource(R.drawable.oval_green)
-                    status?.text = "안전"
+                val costate = protected.stateLogList!![protected.stateLogList?.size!! - 1]["COstate"]
+
+                if(costate != ""){
+                    if (costate.toString().toInt() >= 20 || protected.stateLogList!![protected.stateLogList?.size!! - 1]["LPGstate"] == "위험"){
+                        statusLayout?.setBackgroundResource(R.drawable.oval_red)
+                        status?.text = "위험"
+                    }else{
+                        statusLayout?.setBackgroundResource(R.drawable.oval_green)
+                        status?.text = "안전"
+                    }
                 }
             }
 
             itemView.setOnClickListener {
-                context.startActivity(Intent(context, NotificationActivity::class.java))
+                var intent = Intent(context, NotificationActivity::class.java)
+                intent.putExtra("COstate", protected.stateLogList!![protected.stateLogList?.size!! - 1]["COstate"].toString())
+                intent.putExtra("LPGstate", protected.stateLogList!![protected.stateLogList?.size!! - 1]["LPGstate"].toString())
+                intent.putExtra("name", name?.text.toString())
+
+                context.startActivity(intent)
             }
         }
     }
